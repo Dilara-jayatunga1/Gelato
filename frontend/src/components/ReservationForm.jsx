@@ -8,7 +8,7 @@ const ReservationForm = () => {
             <input type="text" placeholder='Full Name' />
             <input type="email" placeholder='Email' />
             <input type="tel" placeholder='Contaact Number' />
-           < input type="date" required />
+           <input type="date" required />
            
            <select required>
             <option value="">Select Time</option>
@@ -20,14 +20,17 @@ const ReservationForm = () => {
             <option value="15:00">3:00 PM</option>
             <option value="16:00">4:00 PM</option> */}
            </select>
+
            <select required>
-           {...Array.from(10).keys().map(i => (
-            <option key={i} value={`${i + 10}:00`}>{`${i + 10}:00 AM`}</option>
-           ))}
+            {/* Select Number of Guests from 1 to 10 using an Array  */}
+           {[...Array(10).keys().map(i => (
+            <option key={i + 1} value={i + 1}>{i+1 } Guest(s)</option>
+           ))]}
            </select>
+           <button type="submit">Book a Reservation</button>
         </form>
     </div>
   )
 }
 
-export default ReservationForm
+export default ReservationForm;

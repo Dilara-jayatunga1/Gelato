@@ -1,9 +1,12 @@
 import React from 'react'
+import ReservationForm from './components/ReservationForm'
 
 const App = () => {
   return (
-    <div><h1 className='text-2xl text-red-500'>Gelato</h1></div>
+    <div>
+      <ReservationForm />
+    </div>
   )
 }
 
-export default App
+export default App;
