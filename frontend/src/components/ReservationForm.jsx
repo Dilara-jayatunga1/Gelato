@@ -1,6 +1,18 @@
 import React from 'react'
 
 const ReservationForm = () => {
+    const generateTimeSlots = () => {
+        const slots = [];
+        for (let hour =9;hour <21 ; hour++) {
+            const starthour = hour % 12 === 0 ? 12 : hour % 12;
+            const startPeriod = hour < 12 ? 'AM' : 'PM';
+
+            const endhour = (hour + 1) % 12 === 0 ? 12 : (hour + 1) % 12;   
+            const endPeriod = (hour + 1) < 12 ? 'AM' : 'PM';
+            slots.push(`${starthour}:00 ${startPeriod} - ${endhour}:00 ${endPeriod}`);
+        }
+        return slots;
+    }
   return (
     <div>
         <form >
@@ -11,14 +23,12 @@ const ReservationForm = () => {
            <input type="date" required />
            
            <select required>
-            <option value="">Select Time</option>
-            {/* <option value="10:00">10:00 AM</option>
-            <option value="11:00">11:00 AM</option>
-            <option value="12:00">12:00 PM</option>
-            <option value="13:00">1:00 PM</option>
-            <option value="14:00">2:00 PM</option>
-            <option value="15:00">3:00 PM</option>
-            <option value="16:00">4:00 PM</option> */}
+            <option value="">Select Time</option>{
+                generateTimeSlots().map((slot, index) => (
+                <option key={index} value={slot}>{slot}</option>
+                ))
+            }
+            
            </select>
 
            <select required>
