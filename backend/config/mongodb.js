@@ -5,6 +5,13 @@ const connectDB = async () => {
         console.log("connction secured");
         
 })
+    mongoose.connection.on('error', (err) => {
+        console.log("connection failed", err);
+    })
+
+    mongoose.set('strictQuery', true);
+    
+    // Connect to MongoDB using the URI from environment variables
 
 await mongoose.connect(`${process.env.MONGODB_URI}/form`)
 }
