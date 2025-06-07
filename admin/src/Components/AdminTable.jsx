@@ -36,7 +36,7 @@ const AdminTable = () => {
 
       <div className="overflow-x-auto shadow-lg rounded-lg bg-white">
         <table className="min-w-full divide-y divide-gray-200 text-sm text-left">
-          <thead className="bg-blue-600 text-white">
+          <thead className="bg-pink-400 text-white">
             <tr>
               <th className="px-4 py-3 font-semibold">Name</th>
               <th className="px-4 py-3 font-semibold">Email</th>
