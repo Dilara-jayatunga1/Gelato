@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { backendUrl } from '../App';
+import { toast } from 'react-toastify';
 
 const ReservationForm = () => {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
-        contact: "",
+        phone: "",
         date: "",
         time: "",
         guests: "1"
@@ -13,7 +16,26 @@ const ReservationForm = () => {
     const handleChanges= (e) => {
         setFormData ({...formData,[e.target.name]: e.target.value});
     };
-
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+        await axios.post(backendUrl + '/api/reservations/create', formData )
+        toast.success('Reservation made successfully!');
+            
+                setFormData({
+                    name: "",
+                    email: "",
+                    phone: "",
+                    date: "",
+                    time: "",
+                    guests: "1"
+                });
+          
+        } catch (error) {
+        console.error("Error making reservation:", error);
+        toast.error("Failed to make reservation. Please try again.");
+        }
+    }
 
     const generateTimeSlots = () => {
         const slots = [];
@@ -34,7 +56,7 @@ const ReservationForm = () => {
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gradient-to-tr from-pink-100 via-yellow-100 to-purple-100 px-4">
-            <form
+            <form onSubmit={handleSubmit}
                 className={`bg-white shadow-2xl p-10 rounded-3xl w-full max-w-xl space-y-6 transform transition-all duration-700 ease-out 
                     ${animate ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
             >
@@ -61,8 +83,8 @@ const ReservationForm = () => {
                 />
 
                 <input
-                    name="contact"
-                    value={formData.contact}
+                    name="phone"
+                    value={formData.phone}
                     onChange={handleChanges}
                     type="tel"
                     placeholder="Contact Number"
